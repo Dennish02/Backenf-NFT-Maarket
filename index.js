@@ -73,22 +73,22 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
   socket.on("NftCreado", () => {
-    socket.to(process.env.FRONTEND_URL).emit("nftAgregado");
+    socket.to(`${process.env.FRONTEND_URL}`).emit("nftAgregado");
   });
 
   //enviar respuesta al front
   socket.on("ponerEnVenta", () => {
-    socket.to(process.env.FRONTEND_URL).emit("nftDisponile");
+    socket.to(`${process.env.FRONTEND_URL}`).emit("nftDisponile");
   });
   socket.on("editarPrecio", () => {
-    socket.to(process.env.FRONTEND_URL).emit("nftModificado");
+    socket.to(`${process.env.FRONTEND_URL}`).emit("nftModificado");
   });
   socket.on("ventaNFT", () => {
-    socket.to(process.env.FRONTEND_URL).emit("nftVendido");
+    socket.to(`${process.env.FRONTEND_URL}`).emit("nftVendido");
   });
 
   socket.on("balanceUser", () => {
-    socket.to(process.env.FRONTEND_URL).emit("balance");
+    socket.to(`${process.env.FRONTEND_URL}`).emit("balance");
   });
 
   socket.on("portfolio", (room) => {
