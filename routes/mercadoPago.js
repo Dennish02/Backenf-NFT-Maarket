@@ -2,12 +2,10 @@ import express from "express";
 const router = express.Router();
 import checkOut from "../middleware/checkOut.js";
 
-import {
-  mercadoPago
-} from "../controladores/mercadopago.js";
+import { payMercadoPago } from "../controladores/payMercadoPago.js";
 
 
-router.post("/",checkOut, mercadoPago);
+router.post("/", payMercadoPago);
 
   
 // router.post(checkOut, añadirFavNft);

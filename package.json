@@ -27,7 +27,7 @@
     "nodemailer": "^6.7.5",
     "socket.io": "^4.5.0",
 
-    "mercadopago": "^1.5.8",
+    "mercadopago": "^1.5.13",
 
     "mongoose-autopopulate": "^0.16.1"
 

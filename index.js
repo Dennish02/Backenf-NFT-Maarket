@@ -29,7 +29,7 @@ app.use(
 app.use(cors());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
- //res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -73,22 +73,22 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
   socket.on("NftCreado", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home").emit("nftAgregado");
+    socket.to("http://localhost:3000/home").emit("nftAgregado");
   });
 
   //enviar respuesta al front
   socket.on("ponerEnVenta", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home").emit("nftDisponile");
+    socket.to("http://localhost:3000/home").emit("nftDisponile");
   });
   socket.on("editarPrecio", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home").emit("nftModificado");
+    socket.to("http://localhost:3000/home").emit("nftModificado");
   });
   socket.on("ventaNFT", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home").emit("nftVendido");
+    socket.to("http://localhost:3000/home").emit("nftVendido");
   });
 
   socket.on("balanceUser", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home").emit("balance");
+    socket.to("http://localhost:3000/home").emit("balance");
   });
 
   socket.on("portfolio", (room) => {
@@ -96,7 +96,15 @@ io.on("connection", (socket) => {
 
   });
   socket.on("update", () => {
-    socket.to("https://main--inspiring-seahorse-c66785.netlify.app/home/usuario/portfolio").emit("nftUser");
+    socket.to("http://localhost:3000/home/usuario/portfolio").emit("nftUser");
+  });
+
+  socket.on("Navegar", (room) => {
+    socket.join(room);
+
+  });
+  socket.on("Redireccion", (ruta) => {
+    socket.to("http://localhost:3000/home/usuario/wallet").emit("redicreccion", ruta);
   });
 });
 
