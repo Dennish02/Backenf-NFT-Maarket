@@ -1,5 +1,7 @@
 import mercadopago from 'mercadopago';
 
+import Usuario from "../models/Usuarios.js";
+
 mercadopago.configure({
   access_token: process.env.ACCESS_TOKEN_MP
 });
@@ -20,8 +22,8 @@ mercadopago.configure({
       ],
       back_urls: {
         success: process.env.FRONTEND_URL + '/home/usuario/wallet/confirmar',
-        failure: process.env.FRONTEND_URL + '/purchase/failure',
-        pending: process.env.FRONTEND_URL + '/purchase/failure',
+        failure: process.env.FRONTEND_URL + '/home/usuario/wallet/failure',
+        pending: process.env.FRONTEND_URL + '/home/usuario/wallet/failure',
       },
       auto_return: 'approved',
     };
@@ -43,3 +45,18 @@ mercadopago.configure({
  
   /*   return res.status(200).send(preferenceId); */
 };
+ export const setCoins= async (req, res)=>{
+   const { value } = req.body
+   const nombre = req.usuario.nombre
+
+   try {
+    const usuarioBD = await Usuario.findOne({nombre});
+    usuarioBD.coins += Number(value)
+ 
+     await usuarioBD.save()
+    return res.json({msg: 'Coins actualizadas'})
+   } catch (error) {
+    return res.status(404).json({error : error.message})
+   }
+
+ }
