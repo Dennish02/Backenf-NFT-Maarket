@@ -73,22 +73,22 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
   socket.on("NftCreado", () => {
-    socket.to("http://localhost:3000/home").emit("nftAgregado");
+    socket.to(process.env.FRONTEND_URL).emit("nftAgregado");
   });
 
   //enviar respuesta al front
   socket.on("ponerEnVenta", () => {
-    socket.to("http://localhost:3000/home").emit("nftDisponile");
+    socket.to(process.env.FRONTEND_URL).emit("nftDisponile");
   });
   socket.on("editarPrecio", () => {
-    socket.to("http://localhost:3000/home").emit("nftModificado");
+    socket.to(process.env.FRONTEND_URL).emit("nftModificado");
   });
   socket.on("ventaNFT", () => {
-    socket.to("http://localhost:3000/home").emit("nftVendido");
+    socket.to(process.env.FRONTEND_URL).emit("nftVendido");
   });
 
   socket.on("balanceUser", () => {
-    socket.to("http://localhost:3000/home").emit("balance");
+    socket.to(process.env.FRONTEND_URL).emit("balance");
   });
 
   socket.on("portfolio", (room) => {
@@ -96,7 +96,7 @@ io.on("connection", (socket) => {
 
   });
   socket.on("update", () => {
-    socket.to("http://localhost:3000/home/usuario/portfolio").emit("nftUser");
+    socket.to(`${process.env.FRONTEND_URL}/home/usuario/portolio`).emit("nftUser");
   });
 
   socket.on("Navegar", (room) => {
@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
 
   });
   socket.on("Redireccion", (ruta) => {
-    socket.to("http://localhost:3000/home/usuario/wallet").emit("redicreccion", ruta);
+    socket.to(`${process.env.FRONTEND_URL}/home/usuario/wallet`).emit("redicreccion", ruta);
   });
 });
 
