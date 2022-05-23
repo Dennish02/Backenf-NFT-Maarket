@@ -69,8 +69,6 @@ io.on("connection", (socket) => {
     socket.to(`${process.env.FRONTEND_URL}/home`).emit("homeUpdate");
   });
 
-  //enviar respuesta al front
-
   socket.on("balanceUser", () => {
     socket.to(`${process.env.FRONTEND_URL}/home`).emit("balance");
   });
@@ -113,6 +111,8 @@ io.on("connection", (socket) => {
     socket.to(`${process.env.FRONTEND_URL}/home/usuario/wallet`).emit("TransferenciaOk", ruta);
   });
 });
+
+//favoritos
 socket.on("RenderFav", (room) => {
   socket.join(room);
 });
