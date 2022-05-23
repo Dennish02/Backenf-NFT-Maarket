@@ -3,25 +3,6 @@ import nodemailer from "nodemailer";
 export const emailRegistro = async (datos) => {
   const { email, nombre, token } = datos;
 
-  //   //dennis
-  //   var transport = nodemailer.createTransport({
-  //   host: "smtp.mailtrap.io",
-  //   port: 2525,
-  //   auth: {
-  //     user: "bd939024e7b851",
-  //     pass: "bd66a92987b5ce"
-  //   }
-  // });
-
-  //pablo
-  // const transport = nodemailer.createTransport({
-  //   host: process.env.EMAIL_HOST,
-  //   port: process.env.EMAIL_PORT,
-  //   auth: {
-  //     user: process.env.EMAIL_USER,
-  //     pass: process.env.EMAIL_PASS,
-  //   },
-  // });
 
   //Pollo
   var transport = nodemailer.createTransport({
@@ -43,7 +24,7 @@ export const emailRegistro = async (datos) => {
     text: "Comprueba tu cuenta en NFT Market",
     html: `
         <p>Hola: ${nombre} haz click en el enlace para verificar tu cuenta</p>
-        <a href="${process.env.FRONTEND_URL}/confirmar/${token}"> Comporbar Cuenta</a>
+        <a href="${process.env.FRONTEND_URL}/confirmar/${token}"> Comprobar Cuenta</a>
         <p>Si no fuiste vos quien creó la cuenta podes ignorar este email</p>
             `,
   });
