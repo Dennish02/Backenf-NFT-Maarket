@@ -113,5 +113,13 @@ io.on("connection", (socket) => {
     socket.to(`${process.env.FRONTEND_URL}/home/usuario/wallet`).emit("TransferenciaOk", ruta);
   });
 });
+socket.on("RenderFav", (room) => {
+  socket.join(room);
+});
 
+socket.on("Render", () => {
+  socket
+    .to(`${process.env.FRONTEND_URL}/usuario/favoritos`)
+    .emit("updatefav");
+});
 
