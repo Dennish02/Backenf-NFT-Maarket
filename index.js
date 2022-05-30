@@ -68,14 +68,16 @@ io.on("connection", (socket) => {
   socket.on("renderHome", () => {
     socket.to(`${process.env.FRONTEND_URL}/home`).emit("homeUpdate");
   });
-
+  socket.on("changelike", () => {
+    socket.to(`${process.env.FRONTEND_URL}/home`).emit("changelikeicon");
+  });
+  
   socket.on("balanceUser", () => {
     socket.to(`${process.env.FRONTEND_URL}/home`).emit("balance");
   });
 
   socket.on("Portfolio", (room) => {
     socket.join(room);
-
   });
   socket.on("update", () => {
     socket
@@ -87,7 +89,21 @@ io.on("connection", (socket) => {
       .to(`${process.env.FRONTEND_URL}/home/usuario/portfolio`)
       .emit("colectionUser");
   });
+//chat
 
+// socket.on("Chat", (rooms) => {
+//   socket.join(rooms)
+ 
+// });
+socket.on('chat', (mensaje)=>{
+  io.emit("chatmenaje", mensaje);
+})
+
+// socket.on("chat", (mensaje) => {
+//   console.log(mensaje);
+//   //socket.to(`${rooms}`).emit("chatmenaje", mensaje);
+// });
+/*fin chat*/
   socket.on("Settings", (room) => {
     socket.join(room);
   });
@@ -108,19 +124,28 @@ io.on("connection", (socket) => {
   });
 
   socket.on("Transferencia", (ruta) => {
-    socket.to(`${process.env.FRONTEND_URL}/home/usuario/wallet`).emit("TransferenciaOk", ruta);
+    socket
+      .to(`${process.env.FRONTEND_URL}/home/usuario/wallet`)
+      .emit("TransferenciaOk", ruta);
   });
   //favoritos
-socket.on("RenderFav", (room) => {
-  socket.join(room);
+  socket.on("RenderFav", (room) => {
+    socket.join(room);
+  });
+
+  socket.on("Render", () => {
+    socket
+      .to(`${process.env.FRONTEND_URL}/usuario/favoritos`)
+      .emit("updatefav");
+  });
+
+  socket.on("Trades", (room) => {
+    socket.join(room);
+  });
+
+  socket.on("updateTrades", () => {
+    socket
+      .to(`${process.env.FRONTEND_URL}/home/usuario/trades`)
+      .emit("update5");
+  });
 });
-
-socket.on("Render", () => {
-  socket
-    .to(`${process.env.FRONTEND_URL}/usuario/favoritos`)
-    .emit("updatefav");
-});
-
-});
-
-

@@ -1,37 +1,47 @@
 import mongoose from "mongoose";
 
-const TransaccionSchema = mongoose.Schema({
-    actual_owner_Id:{
+const tradeSchema = mongoose.Schema({
+    userA:{
         type: mongoose.Schema.Types.String,
         ref: "Usuario",
         required: true
-    },
-    seller_Id:{
+      },
+    userB:{
         type: mongoose.Schema.Types.String,
         ref: "Usuario",
         required: true
+      },
+    nftA:{
+        type: Object,
+        required: true
     },
-    NFT_id:{
+    nftB:{
+        type: Object,
+        required: true
+    },
+    nftA_id:{
         type: mongoose.Schema.Types.String,
         ref: "NftCreated",
         required: true
     },
-    NFT_colection:{
+    nftB_id:{
         type: mongoose.Schema.Types.String,
         ref: "NftCreated",
         required: true
     },
-    transactionType:{
+    condition:{
         type: String,
         required: true,
-        enum: ['sale', 'gift', 'exchange']
+        enum: ['pending', 'rejected', 'accepted']
     },
-    price:{
-        type: Number
+    status:{
+        type: Boolean,
+        trim: true,
+        default: true
     }
 },{
-    timestamps: true,
+    timestamps: true
 })
 
-const Transaccion = mongoose.model("Transaccion", TransaccionSchema)
-export default Transaccion;
+const Trade = mongoose.model('Trade', tradeSchema)
+export default Trade
