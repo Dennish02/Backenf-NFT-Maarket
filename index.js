@@ -134,7 +134,7 @@ socket.on('chat', (mensaje)=>{
   socket.on("Trades", (room) => {
     socket.join(room);
   });
-
+//comentario
   socket.on("updateTrades", () => {
     socket
       .to(`${process.env.FRONTEND_URL}/home/usuario/trades`)
